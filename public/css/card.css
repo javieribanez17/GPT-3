@@ -1,0 +1,28 @@
+.container-card{
+    margin-top: 50px;
+    width: 80%;
+    margin-left: 10%;
+}
+.grid-container-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    gap: 30px;
+}
+.card{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+.child-grid{
+    min-width: 200px;
+}
+.container-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn{
+    margin-top: 10px;
+}
