@@ -77,9 +77,9 @@ app.post("/pacientes", function (req, res) {
     respondModel = "";
     if (paciente == 1) {
         userPhoto = "Daniel";
-        namePatient = "Daniel Rodríguiez";
-        descriptionPatient = "Es un hombre de 20 años que padece de diabetes tipo 1, el paciente ha seguido el tratamiento pero se siente mal";
-        diagnosticPatient = ["Visión borrosa", "Cansancio y debilidad", "Pérdida de peso involuntaria"];
+        namePatient = "Daniel Rodríguez";
+        descriptionPatient = "Paciente de 20 años con diabetes tipo 1 con glucemias muy altas y falta de riñón derecho. Tiene discapacidad visual y reporta bajos niveles de actividad física.";
+        diagnosticPatient = ["Visión borrosa", "Cansancio y debilidad", "Pérdida de peso involuntaria", "Gripas frecuentes"];
         res.render("paciente", {
             userPhoto: userPhoto,
             namePatient: namePatient,
@@ -90,8 +90,8 @@ app.post("/pacientes", function (req, res) {
     } else if (paciente == 2) {
         userPhoto = "Valentina";
         namePatient = "Valentina Cortés";
-        descriptionPatient = "Es una mujer de 30 años que sufre de asma desde su juventud y usa regularmente un inhalador";
-        diagnosticPatient = ["Dolor en el pecho", "Dificultad para respirar", "Tos constante"];
+        descriptionPatient = "Mujer de 30 años que sufre principalmente de asma desde su juventud, usa regularmente un inhalador. Sus síntomas empeoran durante la menstruación y tiene dificultad para dormir por la tos nocturna";
+        diagnosticPatient = ["Dolor en el pecho", "Dificultad para respirar", "Tos constante", "Fatiga"];
         res.render("paciente", {
             userPhoto: userPhoto,
             namePatient: namePatient,
@@ -102,8 +102,8 @@ app.post("/pacientes", function (req, res) {
     } else {
         userPhoto = "Pablo";
         namePatient = "Pablo García";
-        descriptionPatient = "Es un adulto mayor de 80 años con una fractura en un brazo, producto de un accidente automovilístico";
-        diagnosticPatient = ["Dolor intenso en el brazo", "Falta de apetito", "Ansiedad"];
+        descriptionPatient = "Es un adulto mayor de 80 años con una fractura en un brazo, producto de un accidente automovilístico. El paciente tiene antecedentes de 2 eventos de paro cardiaco y también antecedentes colesterol alto";
+        diagnosticPatient = ["Dolor intenso en el brazo", "Falta de apetito", "Ansiedad", "Alergía a antiflamatorios"];
         res.render("paciente", {
             userPhoto: userPhoto,
             namePatient: namePatient,
