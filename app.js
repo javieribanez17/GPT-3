@@ -17,6 +17,9 @@ let namePatient = "";
 let descriptionPatient = "";
 let diagnosticPatient = [];
 let userPhoto = "";
+let estadoSemaforo = "default";
+let pertinencia = "";
+let consultPrev = "Ninguna";
 //Necessary declarations for use app
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
@@ -24,6 +27,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Respond to GET in the root's server
 app.get("/", function (req, res) {
     res.render("home");
+    pertinencia = "";
+    estadoSemaforo = "default";
+    consultPrev = "Ninguna";
 })
 //Respond to GET in the about root
 app.get("/pacientes", function (req, res) {
@@ -32,7 +38,10 @@ app.get("/pacientes", function (req, res) {
         namePatient: namePatient,
         descriptionPatient: descriptionPatient,
         diagnosticPatient: diagnosticPatient,
-        respondModel: respondModel
+        respondModel: respondModel,
+        estadoSemaforo: estadoSemaforo,
+        pertinencia: pertinencia,
+        consultPrev : consultPrev
     });
 })
 //Respond to POST in the compose root
@@ -41,7 +50,7 @@ app.post("/gpt", async function (req, res) {
                     ") y tiene sintomas de ("+diagnosticPatient+"). Necesito saber si el procedimiento ayudará a tratar su condición o mejorar"+
                     " sus sintomas y para esto quiero que me digas si el nivel de pertinencia de este procedimiento es bajo, medio o alto."+
                     " Además, necesito que me des la justificación del nivel en un texto de máximo 60 palabras."+
-                    " La Respuesta que me entregues debe ser en formato:\n(Nivel de pertinencia:\nJustificación:)";                    
+                    " La Respuesta que me entregues debe ser en formato:(Nivel de pertinencia:\nJustificación:)";                    
     try {
         const response = await openai.createCompletion({
             model: "text-davinci-003",
@@ -55,12 +64,30 @@ app.post("/gpt", async function (req, res) {
             //stop: ["/n"]
         });
         respondModel = response.data.choices[0].text;
+        pertinencia = respondModel.slice(2, -1).split("\n",2)[0].split(": ",2)[1];
+        consultPrev = req.body.questionModel;
+        if(pertinencia.includes("Alto")){
+            estadoSemaforo = "green";
+            pertinencia = "Alta"
+        }else if(pertinencia.includes("Medio")){
+            estadoSemaforo = "yellow";
+            pertinencia = "Media"
+        }else if(pertinencia.includes("Bajo")){
+            estadoSemaforo = "red";
+            pertinencia = "Baja"
+        }else{
+            estadoSemaforo = "default";
+        }
+        console.log();
         return res.render("paciente", {
             userPhoto: userPhoto,
             namePatient: namePatient,
             descriptionPatient: descriptionPatient,
             diagnosticPatient: diagnosticPatient,
-            respondModel: respondModel
+            respondModel: respondModel,
+            estadoSemaforo: estadoSemaforo,
+            pertinencia: pertinencia,
+            consultPrev : consultPrev
         });
     } catch (error) {
         return res.status(400).json({
@@ -85,7 +112,10 @@ app.post("/pacientes", function (req, res) {
             namePatient: namePatient,
             descriptionPatient: descriptionPatient,
             diagnosticPatient: diagnosticPatient,
-            respondModel: respondModel
+            respondModel: respondModel,
+            estadoSemaforo: estadoSemaforo,
+            pertinencia: pertinencia,
+            consultPrev : consultPrev
         });
     } else if (paciente == 2) {
         userPhoto = "Valentina";
@@ -97,7 +127,10 @@ app.post("/pacientes", function (req, res) {
             namePatient: namePatient,
             descriptionPatient: descriptionPatient,
             diagnosticPatient: diagnosticPatient,
-            respondModel: respondModel
+            respondModel: respondModel,
+            estadoSemaforo: estadoSemaforo,
+            pertinencia: pertinencia,
+            consultPrev : consultPrev
         });
     } else {
         userPhoto = "Pablo";
@@ -109,7 +142,10 @@ app.post("/pacientes", function (req, res) {
             namePatient: namePatient,
             descriptionPatient: descriptionPatient,
             diagnosticPatient: diagnosticPatient,
-            respondModel: respondModel
+            respondModel: respondModel,
+            estadoSemaforo: estadoSemaforo,
+            pertinencia: pertinencia,
+            consultPrev : consultPrev
         });
     }
 })

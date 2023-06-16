@@ -1,7 +1,7 @@
 <%- include("partials/navBar"); -%>
     <div class="container-card">
         <div class="grid-container-card">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 100%;">
                 <img src="/images/<%= userPhoto %>.jpg" class="card-img-top" alt="<%= userPhoto %>">
                 <div class="card-body">
                     <h5 class="card-title"><%= namePatient %></h5>
@@ -15,6 +15,17 @@
                     <li class="list-group-item"><%= diagnosticPatient[3] %></li>
                 </ul>
             </div>
+            <div class="child-grid-semaforo">
+                <div class="containerFlex_semaforoText1">
+                    <h6>Pertinencia</h6><br>
+                </div>
+                <div class="containerFlex_semaforoImage">
+                    <img src="/images/<%= estadoSemaforo %>.png" alt="<%= estadoSemaforo %>" style="height:100%; max-height: 200px;">
+                </div>
+                <div class="containerFlex_semaforoText2">
+                    <p><%= pertinencia %></p><br>
+                </div>
+            </div>
             <div class="child-grid">
                 <div class="form-group">
                     <label for="askModel">Respuesta de la pertinencia médica del procedimiento solicitado:</label>
@@ -22,6 +33,7 @@
                 </div>
             </div>
             <div class="child-grid">
+                <p>Consulta previa: <i><%= consultPrev %></i></p>
                 <form action="/gpt" method="post">
                     <div class="form-group">
                         <label for="questionModel">Escriba el procedimiento que desea autorizar:</label>
