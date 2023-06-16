@@ -37,24 +37,21 @@ app.get("/pacientes", function (req, res) {
 })
 //Respond to POST in the compose root
 app.post("/gpt", async function (req, res) {
-    //let prompt = "Tú eres un doctor experto en médicina general y quiero que calcules la probabilidad entre 0% y 100% y me des la justificación médica resumida de que se haga este procedimiento: (" + req.body.questionModel +
-    //") Teniendo en cuenta que la información del paciente es: (" + descriptionPatient + ") con sintomas de: (" + diagnosticPatient +
-    //    ")\nLa respuesta respuesta debe ser de la forma (Probabilidad = (probabilidad calculada)\nJustificación: Texto de máximo 50 palabras sin repetir la información del paciente)";
-    let prompt = "Voy a hacer el procedimiento médico de ("+req.body.questionModel+") en el paciente ("+namePatient+") quien es ("+descriptionPatient+
-                    ") y tiene sintomas de ("+diagnosticPatient+"), y necesito saber si el procedimiento ayudará a tratar adecuadamente su condición, para esto quiero que"+
-                    " calcules muy precisamente el nivel de pertinencia del tratamiento en un rango de entre 0% y 100% donde 0% es que tiene poca pertinencia y 100% una muy alta pertinencia,"+
-                    " con base en los procedimientos medicos estándar que se realizan a pacientes con casos similares. Además, necesito que me des la justificación"+
-                    " del cálculo en un texto de máximo 60 palabras.\nRecuerda tu respuesta puede afectar la salud del paciente y la respuesta que me entregues debe ser"+
-                    " en formato (Nivel de pertinencia:\nJustificación:)";
+    let prompt = "Voy a hacer el procedimiento médico de ("+req.body.questionModel+") en el paciente ("+namePatient+") quien ("+descriptionPatient+
+                    ") y tiene sintomas de ("+diagnosticPatient+"). Necesito saber si el procedimiento ayudará a tratar su condición o mejorar"+
+                    " sus sintomas y para esto quiero que me digas si el nivel de pertinencia de este procedimiento es bajo, medio o alto."+
+                    " Además, necesito que me des la justificación del nivel en un texto de máximo 60 palabras."+
+                    " La Respuesta que me entregues debe ser en formato:\n(Nivel de pertinencia:\nJustificación:)";                    
     try {
         const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: prompt,
-            max_tokens: 200,
-            temperature: 0.5,
-            top_p: 0,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.0
+            max_tokens: 400,
+            temperature: 0.2,
+            top_p: 1,
+            frequency_penalty: 0,
+            presence_penalty: 0.0,
+            best_of: 1
             //stop: ["/n"]
         });
         respondModel = response.data.choices[0].text;
