@@ -81,7 +81,7 @@ app.post("/pacientes", function (req, res) {
     if (paciente == 1) {
         userPhoto = "Daniel";
         namePatient = "Daniel Rodríguiez";
-        descriptionPatient = "Es un joven de 15 años que padece de diabetes tipo 1, el paciente ha seguido el tratamiento pero se siente mal";
+        descriptionPatient = "Es un hombre de 20 años que padece de diabetes tipo 1, el paciente ha seguido el tratamiento pero se siente mal";
         diagnosticPatient = ["Visión borrosa", "Cansancio y debilidad", "Pérdida de peso involuntaria"];
         res.render("paciente", {
             userPhoto: userPhoto,
@@ -93,7 +93,7 @@ app.post("/pacientes", function (req, res) {
     } else if (paciente == 2) {
         userPhoto = "Valentina";
         namePatient = "Valentina Cortés";
-        descriptionPatient = "Es una mujer de 27 años que sufre de asma desde su juventud y usa regularmente un inhalador";
+        descriptionPatient = "Es una mujer de 30 años que sufre de asma desde su juventud y usa regularmente un inhalador";
         diagnosticPatient = ["Dolor en el pecho", "Dificultad para respirar", "Tos constante"];
         res.render("paciente", {
             userPhoto: userPhoto,
@@ -105,7 +105,7 @@ app.post("/pacientes", function (req, res) {
     } else {
         userPhoto = "Pablo";
         namePatient = "Pablo García";
-        descriptionPatient = "Es un adulto mayor de 70 años con una fractura en un brazo, producto de un accidente automovilístico";
+        descriptionPatient = "Es un adulto mayor de 80 años con una fractura en un brazo, producto de un accidente automovilístico";
         diagnosticPatient = ["Dolor intenso en el brazo", "Falta de apetito", "Ansiedad"];
         res.render("paciente", {
             userPhoto: userPhoto,
