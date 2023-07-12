@@ -4,7 +4,7 @@
   "description": "Demo Procaps",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app.js"
+    "start": "node ./index.js"
   },
   "author": "EY",
   "license": "ISC",
