@@ -2,7 +2,7 @@
   "name": "procaps",
   "version": "1.0.0",
   "description": "Demo Procaps",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "node ./index.js"
   },
