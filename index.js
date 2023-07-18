@@ -105,8 +105,8 @@ app.post("/pacientes", function (req, res) {
     if (paciente == 1) {
         userPhoto = "Daniel";
         namePatient = "Daniel Rodríguez";
-        descriptionPatient = "Paciente de 20 años con diabetes tipo 1 con glucemias muy altas y falta de riñón derecho. Tiene discapacidad visual y reporta bajos niveles de actividad física.";
-        diagnosticPatient = ["Encefalomielitis miálgica", "Cansancio y debilidad", "Pérdida de peso involuntaria", "Gripas frecuentes"];
+        descriptionPatient = "Paciente de 20 años con diabetes tipo 1 con glucemias muy altas y falta de riñón derecho. Tiene encefalomielitis miálgica y reporta bajos niveles de actividad física.";
+        diagnosticPatient = ["Visión borrosa", "Cansancio y debilidad", "Pérdida de peso involuntaria", "Gripas frecuentes"];
         res.render("paciente", {
             userPhoto: userPhoto,
             namePatient: namePatient,
