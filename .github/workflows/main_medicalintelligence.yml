@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'MedicalIntelligence'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8B94BD185611409FBF4D4B4EC598173E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2E9B7391A67E470FA4ED6DB220B4E03B }}
           package: .
