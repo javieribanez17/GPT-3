@@ -4,47 +4,75 @@
             <div class="card" style="width: 100%; min-width: 200px;">
                 <img src="/images/<%= userPhoto %>.jpg" class="card-img-top" alt="<%= userPhoto %>">
                 <div class="card-body">
-                    <h5 class="card-title"><%= namePatient %></h5>
-                    <p class="card-text"><%= descriptionPatient %></p>
-                    <p class="card-text"><strong>Síntomas:</strong></p>
+                    <h5 class="card-title">
+                        <%= namePatient %>
+                    </h5>
+                    <p class="card-text">
+                        <%= descriptionPatient %>.
+                    </p>
+                    <h6 style="margin: 0;">Síntomas:</h6>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><%= diagnosticPatient[0] %></li>
-                    <li class="list-group-item"><%= diagnosticPatient[1] %></li>
-                    <li class="list-group-item"><%= diagnosticPatient[2] %></li>
-                    <li class="list-group-item"><%= diagnosticPatient[3] %></li>
+                <ul class="list-group list-group-flush" style="margin: 0; padding: 0;">
+                    <li class="list-group-item">
+                        <%= diagnosticPatient[0] %>
+                    </li>
+                    <li class="list-group-item">
+                        <%= diagnosticPatient[1] %>
+                    </li>
+                    <li class="list-group-item">
+                        <%= diagnosticPatient[2] %>
+                    </li>
+                    <li class="list-group-item">
+                        <%= diagnosticPatient[3] %>
+                    </li>
                 </ul>
             </div>
+            <!-- Semaforo -->
             <div class="child-grid-semaforo">
-                <div class="containerFlex_semaforoText1">
-                    <h6>Pertinencia</h6><br>
-                </div>
-                <div class="containerFlex_semaforoImage">
-                    <img src="/images/<%= estadoSemaforo %>.png" alt="<%= estadoSemaforo %>" style="height:100%; max-height: 200px;">
-                </div>
-                <div class="containerFlex_semaforoText2">
-                    <p><%= pertinencia %></p><br>
-                </div>
+                <% if (startModel) { %>
+                    <div class="containerFlex_semaforoText1">
+                        <h6>Pertinencia</h6><br>
+                    </div>
+                    <div class="containerFlex_semaforoImage">
+                        <img src="/images/<%= estadoSemaforo %>.png" alt="<%= estadoSemaforo %>"
+                            style="height:100%; max-height: 200px;">
+                    </div>
+                    <div class="containerFlex_semaforoText2">
+                        <p>
+                            <%= pertinencia %>
+                        </p><br>
+                    </div>
+                    <% } %>
             </div>
-            <div class="child-grid">
-                <div class="form-group">
-                    <label for="askModel">Respuesta de la pertinencia médica del procedimiento solicitado:</label>
-                    <textarea class="form-control" disabled="true" id="askModel" rows="10"><%= respondModel %></textarea>
-                </div>
-            </div>
-            <div class="child-grid">
-                <p>Consulta previa: <i><%= consultPrev %></i></p>
-                <form action="/gpt" method="post">
+            <!-- Caja de respuesta -->
+            <div class="child-grid-top">
+                <% if (startModel) { %>
                     <div class="form-group">
-                        <label for="questionModel">Escriba el procedimiento que desea autorizar:</label>
-                        <textarea class="form-control" id="questionModel" name="questionModel" rows="2"></textarea>
+                        <h6>Pertinencia médica del procedimiento solicitado:</h6>
+                        <textarea class="form-control" disabled="true" id="askModel"
+                            rows="10"><%= respondModel %></textarea>
                     </div>
-                    <div class="container-flex">
-                        <div>
-                            <button class="btn btn-primary" type="submit" name="sendRequest">Enviar</button>
-                        </div>
-                    </div>
-                </form>
+                    <% } %>
+            </div>
+            <!-- Pregunta anterior -->
+            <div class="child-grid-bottom">
+                <% if (startModel) { %>
+                    <p><strong>Consulta previa:</strong><i>
+                            <%= consultPrev %>
+                        </i></p>
+                    <% } %>
+                        <form action="/gpt" method="post">
+                            <div class="form-group">
+                                <label for="questionModel">Escriba el procedimiento que desea autorizar:</label>
+                                <textarea class="form-control" id="questionModel" name="questionModel" rows="3"
+                                    spellcheck="false"></textarea>
+                            </div>
+                            <div class="container-flex">
+                                <div>
+                                    <button class="btn btn-primary" type="submit" name="sendRequest">Enviar</button>
+                                </div>
+                            </div>
+                        </form>
             </div>
         </div>
     </div>
